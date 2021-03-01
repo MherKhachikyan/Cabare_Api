@@ -46,7 +46,6 @@ namespace Cabare_Charlotte
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();

@@ -15,11 +15,9 @@ namespace Cabare_Charlotte.DAL
         }
 
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Client>().ToTable("Clients");
         }
     }

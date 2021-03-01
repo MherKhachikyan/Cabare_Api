@@ -8,16 +8,21 @@ namespace Cabare_Charlotte.Helper
 {
     public static class PlayerHelper
     {
-        public static string[] GetDirectory()
+        public static List<string> GetDirectory()
         {
-            var directories = Directory.GetDirectories(Constant.Constant.Directory);
+            var directories = Directory.GetDirectories(Constant.Constant.Directory).ToList();
 
             return directories;
         }
 
-        public static string[] GetSongs(string path)
+        public static List<string> GetSongs(List<string> directores)
         {
-            var files = Directory.GetFiles(path, "*.mp3");
+            List<string> files = new List<string>();
+
+            foreach (var item in directores)
+            {
+                files.AddRange(Directory.GetFiles($"{Constant.Constant.Directory + @"\"}{item}", "*.mp3").ToList());
+            }
 
             return files;
         }

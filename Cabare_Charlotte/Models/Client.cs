@@ -8,8 +8,11 @@ namespace Cabare.Models
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
+        public int Count { get; set; }
+
         public string DeviceId { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
     }
 }

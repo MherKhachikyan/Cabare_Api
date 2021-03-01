@@ -10,6 +10,8 @@ using Cabare_Charlotte.DAL;
 using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Cabare_Charlotte.Helper;
+using Cabare.Models;
 
 namespace Cabare_Charlotte.Controllers
 {
@@ -17,32 +19,45 @@ namespace Cabare_Charlotte.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IServiceScopeFactory _scopeFactory;
+        PlayerDbContext _playerDbContext;
 
-        public HomeController(ILogger<HomeController> logger, IServiceScopeFactory scopeFactory)
+        public HomeController(ILogger<HomeController> logger, IServiceScopeFactory scopeFactory, PlayerDbContext playerDbContext)
         {
             _logger = logger;
             _scopeFactory = scopeFactory;
+            _playerDbContext = playerDbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public List<string> GetDirectores()
         {
-            using (var scope = _scopeFactory.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<PlayerDbContext>();
-                var data = db.Orders.ToList();
-            }
-            return View();
+            return PlayerHelper.GetDirectory();
         }
 
-        public IActionResult Privacy()
+        public List<string> GetSongs(List<string> directores)
         {
-            return View();
+            return PlayerHelper.GetSongs(directores);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public int Increment(int count, string deviceId)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _playerDbContext.Clients.Update(new Client { Count = count, DeviceId = deviceId });
+            _playerDbContext.SaveChanges();
+            var lastCount = _playerDbContext.Clients.FirstOrDefault(c => c.DeviceId == deviceId).Count;
+
+            return lastCount;
+        }
+
+        public void RemoveCount(string deviceId)
+        {
+            _playerDbContext.Clients.Update(new Client { DeviceId = deviceId, Count = 0 });
+            _playerDbContext.SaveChanges();
+        }
+
+        public IActionResult Index(string deviceId) 
+        { 
+            var client = _playerDbContext.Clients.FirstOrDefault(c => c.DeviceId == deviceId);
+
+            return View(client);
         }
     }
 }

@@ -1,8 +1,257 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Cabare.Models.Client
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+    <button style="width:200px; position:absolute; height:60px; right:300px " onclick="document.getElementById('id01').style.display='block'">Delete Count</button>
+
+    <div  id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content" >
+            <div class="container">
+                <h1>Delete Count</h1>
+                <p>Are you sure you want to delete count?</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <nav style="left:300px ">
+        <ul>
+            <li>
+                <a href="#">Rooms<div id="down-triangle"></div></a>
+                <ul >
+                    <li><a value="" href="#">Room-1<div class="circle"></div></a></li>
+                    <li><a href="#">Room-2<div class="circle"></div></a></li>
+                    <li><a href="#">Room-3<div class="circle"></div></a></li>
+                    <li><a href="#">Room-4<div class="circle"></div></a></li>
+                    <li><a href="#">Room-5<div class="circle"></div></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+        button:hover {
+            opacity: 1;
+        }
+
+    /* Float cancel and delete buttons and add an equal width */
+    .cancelbtn, .deletebtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add a color to the cancel button */
+    .cancelbtn {
+        background-color: #ccc;
+        color: black;
+    }
+
+    /* Add a color to the delete button */
+    .deletebtn {
+        background-color: #f44336;
+    }
+
+    /* Add padding and center-align text to the container */
+    .container {
+        padding: 16px;
+        text-align: center;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Modal Close Button (x) */
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and delete button on extra small screens */
+    media screen and (max-width: 300px) {
+        .cancelbtn, .deletebtn
+
+    {
+        width: 100%;
+    }
+    }
+</style>
+
+<style>
+    body {
+        background: #f2f2f2;
+        font-size: 1.25em;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    nav {
+        margin: 100px auto;
+        text-align: center;
+    }
+
+        nav ul {
+            margin-left: 0;
+            padding-left: 0;
+            width: 500px;
+            list-style: none;
+            position: relative;
+            display: inline-table;
+        }
+
+            nav ul ul {
+                display: none;
+            }
+
+            nav ul li:hover > ul {
+                display: block;
+            }
+
+            nav ul li {
+                float: left;
+                width: 500px;
+                text-align: left;
+                border-bottom: 3px solid #2ecc71;
+            }
+
+                nav ul li:hover {
+                    background: #f2f2f2;
+                }
+
+                nav ul li a {
+                    display: block;
+                    padding: 15px 10px;
+                    color: #2a2a2a;
+                    text-decoration: none;
+                }
+
+            nav ul ul {
+                border-radius: 0px;
+                padding: 0;
+                position: absolute;
+                top: 100%;
+            }
+
+                nav ul ul li {
+                    float: none;
+                    border-bottom: 2px solid #eaeaea;
+                    position: relative;
+                }
+
+                    nav ul ul li a {
+                        padding: 15px 10px;
+                        color: #838383;
+                    }
+
+                        nav ul ul li a:hover {
+                            background: #47d583;
+                            color: #fff;
+                        }
+
+    #down-triangle {
+        float: right;
+        width: 0;
+        height: 0;
+        margin-top: 10px;
+        border-top: 10px solid #2ecc71;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+
+    .circle {
+        float: right;
+        display: inline;
+        width: 10px;
+        height: 10px;
+        margin-top: 5px;
+        border: 3px solid #8ce5b2;
+        -moz-border-radius: 100%;
+        -webkit-border-radius: 100%;
+        border-radius: 100%;
+    }
+</style>
+
+<script>
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
